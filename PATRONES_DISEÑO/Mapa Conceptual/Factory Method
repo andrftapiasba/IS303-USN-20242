@@ -1,0 +1,59 @@
+interface Transporte {
+    String moverse();
+}
+
+
+class Bicicleta implements Transporte {
+    @Override
+    public String moverse() {
+        return "Ando en bicicleta";
+    }
+}
+
+
+class Carro implements Transporte {
+    @Override
+    public String moverse() {
+        return "Conduzco un carro";
+    }
+}
+
+
+class TransporteFactory {
+
+
+    public Transporte crearTransporte(String tipo) {
+        if (tipo.equalsIgnoreCase("bicicleta")) {
+            return new Bicicleta();
+        } else if (tipo.equalsIgnoreCase("carro")) {
+            return new Carro();
+        } else {
+            return null;  
+        }
+    }
+}
+
+
+public class Cliente {
+    public static void main(String[] args) {
+        TransporteFactory factory = new TransporteFactory();
+        
+
+        Transporte bici = factory.crearTransporte("bicicleta");
+        if (bici != null) {
+            System.out.println("Viaje: " + bici.moverse());  
+        }
+
+     
+        Transporte carro = factory.crearTransporte("carro");
+        if (carro != null) {
+            System.out.println("Viaje: " + carro.moverse());  
+        }
+
+  
+        Transporte desconocido = factory.crearTransporte("moto");
+        if (desconocido == null) {
+            System.out.println("Tipo de transporte no soportado.");  
+    }
+}
+}
