@@ -1,0 +1,91 @@
+interface Silla {
+    String tipo();
+}
+
+
+interface Mesa {
+    String tipo();
+}
+
+
+interface MuebleFactory {
+    Silla crearSilla();
+    Mesa crearMesa();
+}
+
+
+class ModernoFactory implements MuebleFactory {
+    @Override
+    public Silla crearSilla() {
+        return new SillaModerna();
+    }
+
+    @Override
+    public Mesa crearMesa() {
+        return new MesaModerna();
+    }
+}
+
+
+class ClasicoFactory implements MuebleFactory {
+    @Override
+    public Silla crearSilla() {
+        return new SillaClasica();
+    }
+
+    @Override
+    public Mesa crearMesa() {
+        return new MesaClasica();
+    }
+}
+
+
+class SillaModerna implements Silla {
+    @Override
+    public String tipo() {
+        return "Silla Moderna";
+    }
+}
+
+
+class MesaModerna implements Mesa {
+    @Override
+    public String tipo() {
+        return "Mesa Moderna";
+    }
+}
+
+
+class SillaClasica implements Silla {
+    @Override
+    public String tipo() {
+        return "Silla Clásica";
+    }
+}
+
+
+class MesaClasica implements Mesa {
+    @Override
+    public String tipo() {
+        return "Mesa Clásica";
+    }
+}
+
+
+public class Cliente {
+    public static void main(String[] args) {
+        MuebleFactory modernoFactory = new ModernoFactory();
+        Silla sillaModerna = modernoFactory.crearSilla();
+        Mesa mesaModerna = modernoFactory.crearMesa();
+
+        System.out.println(sillaModerna.tipo());  
+        System.out.println(mesaModerna.tipo());    
+
+        MuebleFactory clasicoFactory = new ClasicoFactory();
+        Silla sillaClasica = clasicoFactory.crearSilla();
+        Mesa mesaClasica = clasicoFactory.crearMesa();
+
+        System.out.println(sillaClasica.tipo());    
+        System.out.println(mesaClasica.tipo());      
+    }
+}
