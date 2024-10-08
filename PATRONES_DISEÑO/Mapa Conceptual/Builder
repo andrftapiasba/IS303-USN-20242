@@ -1,0 +1,78 @@
+class Pizza {
+    private String masa;
+    private String salsa;
+    private String queso;
+    private String[] ingredientes;
+
+   
+    private Pizza(PizzaBuilder builder) {
+        this.masa = builder.masa;
+        this.salsa = builder.salsa;
+        this.queso = builder.queso;
+        this.ingredientes = builder.ingredientes;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Pizza:\n");
+        sb.append("Masa: ").append(masa).append("\n");
+        sb.append("Salsa: ").append(salsa).append("\n");
+        sb.append("Queso: ").append(queso).append("\n");
+        sb.append("Ingredientes: ");
+        if (ingredientes != null) {
+            for (String ing : ingredientes) {
+                sb.append(ing).append(" ");
+            }
+        }
+        return sb.toString();
+    }
+
+
+    static class PizzaBuilder {
+        private String masa;
+        private String salsa;
+        private String queso;
+        private String[] ingredientes;
+
+        public PizzaBuilder setMasa(String masa) {
+            this.masa = masa;
+            return this;
+        }
+
+        public PizzaBuilder setSalsa(String salsa) {
+            this.salsa = salsa;
+            return this;
+        }
+
+        public PizzaBuilder setQueso(String queso) {
+            this.queso = queso;
+            return this;
+        }
+
+        public PizzaBuilder setIngredientes(String[] ingredientes) {
+            this.ingredientes = ingredientes;
+            return this;
+        }
+
+        
+        public Pizza construir() {
+            return new Pizza(this);
+        }
+    }
+}
+
+
+public class Cliente {
+    public static void main(String[] args) {
+      
+        Pizza pizza = new Pizza.PizzaBuilder()
+                .setMasa("Delgada")
+                .setSalsa("Tomate")
+                .setQueso("Mozzarella")
+                .setIngredientes(new String[]{"Pepperoni", "Champiñones", "Aceitunas"})
+                .construir();
+
+     
+        System.out.println(pizza);
+    }
+}
